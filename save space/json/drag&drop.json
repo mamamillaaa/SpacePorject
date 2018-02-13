@@ -1,0 +1,56 @@
+[
+	{
+		"sentence":
+		{
+			"x": 260,
+			"y": 200,
+			"content": "Il est facile de reconnaître une girafe à son                      cou.\nC'est au cours des siècles que le cou des girafes                      allongé.\nCeci leur permet maintenant d'atteindre le                      des arbres\n qui constitue leur nourriture                      ."
+		},
+		"draggableText":
+		[
+			{
+				"x": 1000,
+				"y": 900,
+				"content": "long"
+			},
+			{
+				"x": 400,
+				"y": 900,
+				"content": "s'est"
+			},
+			{
+				"x": 1300,
+				"y": 900,
+				"content": "feuillage"
+			},
+			{
+				"x": 700,
+				"y": 900,
+				"content": "principale"
+			}
+		],
+		"dropSurface":
+		[
+			{
+				"x": 1315,
+				"y": 200,
+				"textID": null
+			},
+			{
+				"x": 1330,
+				"y": 261,
+				"textID": null
+			},
+			{
+				"x": 1250,
+				"y": 322,
+				"textID": null
+			},
+			{
+				"x": 1220,
+				"y": 383,
+				"textID": null
+			}
+		]
+	}
+]

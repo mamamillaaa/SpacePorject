@@ -1,0 +1,21 @@
+[
+	[
+		{
+			"x": 380,
+			"y": 180,
+			"content": ["Le vide qui entoure la Terre est peuplé",
+						"d’un grand nombre d’objets qui, du fait",
+						"de leur vitesse très importante,",
+						"représentent un risque non négligeable",
+						"pour les missions spatiales."]
+		},
+		
+		{
+			"x": 880,
+			"y": 540,
+			"content": ["Ces objets représentent également",
+						"un risque sur Terre, en cas",
+						"de retombée au sol de morceaux."]
+		}
+	]
+]

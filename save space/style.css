@@ -1,0 +1,9 @@
+html{
+    width: 100%;
+    height: auto;
+    background-image: url('test_background.png');
+    background-size: cover;
+    -webkit-background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
