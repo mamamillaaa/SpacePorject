@@ -1,0 +1,38 @@
+[
+	{
+		"category": "lesson",
+		"id": 0,
+		"previous": null,
+		"next": 1
+	},
+	{
+		"category": "lesson",
+		"id": 1,
+		"previous": 0,
+		"next": 2
+	},
+	{
+		"category": "lesson",
+		"id": 2,
+		"previous": 1,
+		"next": 3
+	},
+	{
+		"category": "lesson",
+		"id": 3,
+		"previous": 2,
+		"next": 4
+	},
+	{
+		"category": "lesson",
+		"id": 4,
+		"previous": 3,
+		"next": 5
+	},
+	{
+		"category": "lesson",
+		"id": 5,
+		"previous": 4,
+		"next": 0
+	}
+]

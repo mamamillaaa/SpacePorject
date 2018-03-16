@@ -8,5 +8,589 @@
 </head>
 <body style="background-color: #000000;">
 <script src="js/phaser.min.js"></script>
-<script src="js/script.js"></script>
+<script language="javascript">
+
+var game = new Phaser.Game(1920, 1080, Phaser.AUTO, 'Projet Space', { preload: preload, create: create }, true);
+
+
+const BACKGROUND_COLOR = 0xEEEEEE;
+
+const DROP_SURFACE_COLOR = 0xBBBBBB;
+//width and height of the drop surface rectangle
+const DROP_SURFACE_WIDTH = 240;
+const DROP_SURFACE_HEIGHT = 60;
+//width and height around the drop surface rectangle for which the drop is still valid
+const DROP_SURFACE_WIDTH_OVERFLOW = DROP_SURFACE_WIDTH/3;
+const DROP_SURFACE_HEIGHT_OVERFLOW = DROP_SURFACE_HEIGHT/3; 
+
+const DRAGGABLE_TEXT_HEIGHT = 32;
+const DRAGGABLE_TEXT_FONT = DRAGGABLE_TEXT_HEIGHT.toString() + "px Courier";
+//const DRAGGABLE_TEXT_FONT = DRAGGABLE_TEXT_HEIGHT.toString() + "px Revalia";
+
+const DRAGGABLE_TEXT_FILL = "#19cb65";
+//const DRAGGABLE_TEXT_FIXED_FILL = "#DDDD00";
+
+const TEXT_SPEED = 1;//25;
+
+const LINE_HEIGHT = 40;
+
+const FIRST_EVENT_ID = 0;
+
+var eventID = FIRST_EVENT_ID;
+
+var draggableTexts = [];
+var dropSurfaces = [];
+
+var questionID = 0;
+
+var vidNum = 0; //temp!
+
+var textHolder = [];
+var textHolderLineID = 0;
+
+var pageID = 0;
+var paragraphID = 0;
+var lineID = 0;
+
+ VIDEO_LENGTH = [4200, 4200, 8200, 11200, 6200, 14200, 8200];
+
+
+function preload() {
+	game.load.image('title_text', 'assets/image/title/text.png');
+	game.load.image('title_back', 'assets/image/title/back.png');
+	game.load.image('title_window', 'assets/image/title/window.png');
+	game.load.image('button_play', 'assets/image/title/button_play.png');
+
+	game.load.image('play_back', 'assets/image/play/back.png');
+	game.load.image('play_window', 'assets/image/play/window.png');
+	game.load.image('arrow', 'assets/image/play/arrow.png');
+	game.load.image('tv', 'assets/image/play/tv.png'); 
+	
+	game.load.image('lesson11', 'assets/image/lesson/cours11.jpg');
+	game.load.image('lesson12', 'assets/image/lesson/cours12.jpg');
+	game.load.image('lesson21', 'assets/image/lesson/cours21.jpg');
+	game.load.image('lesson22', 'assets/image/lesson/cours22.jpg');
+	game.load.image('lesson31', 'assets/image/lesson/cours31.jpg');
+	game.load.image('lesson32', 'assets/image/lesson/cours32.jpg');
+	game.load.image('lesson41', 'assets/image/lesson/cours41.jpg');
+	game.load.image('lesson42', 'assets/image/lesson/cours42.jpg');
+	
+	//game.load.image('validationButton', 'validation_button.png');
+	
+	game.load.json('gameStructure', 'json/gameStructure.json');
+	game.load.json('quizz', 'json/quizz.json');
+	game.load.json('lesson', 'json/lesson.json');
+	game.load.json('dragAndDrop', 'json/drag&drop.json');
+	
+	game.load.video('nono0', 'assets/video/nono_0.mp4');
+	game.load.video('nono1', 'assets/video/nono_1.mp4');
+	game.load.video('nono2', 'assets/video/nono_2.mp4');
+	game.load.video('nono3', 'assets/video/nono_3.mp4');
+	game.load.video('nono4', 'assets/video/nono_4.mp4');
+	game.load.video('nono5', 'assets/video/nono_5.mp4');
+	game.load.video('nono6', 'assets/video/nono_6.mp4');
+	
+	game.load.audio('welcome', 'assets/audio/welcome.mp3');
+	game.load.audio('intro1', 'assets/audio/intro1.mp3');
+}
+
+function create() {
+	game.scale.scaleMode = Phaser.ScaleManager.aspectRatio;
+	game.scale.pageAlignHorizontally = true;
+	game.scale.pageAlignVertically = true;
+	game.scale.setShowAll();
+	game.scale.refresh();
+	
+	//createPlayScene();
+	structure = game.cache.getJSON('gameStructure');
+	//quizz = game.cache.getJSON('quizz');
+	lesson = game.cache.getJSON('lesson');
+	createTitleScene();
+}
+
+function update() {
+	game.scale.setShowAll();
+	game.scale.refresh();
+}
+
+function createTitleScene() {
+	title_back = game.add.image(0, 0, 'title_back');
+	title_text = game.add.image(359, 50, 'title_text');
+	title_window = game.add.image(510, 260, 'title_window');
+	title_jouer = game.add.image(597, 360, 'button_play');
+	
+	title_jouer.inputEnabled = true;
+	title_jouer.events.onInputDown.add(titleToPlayTransition, this);
+}
+
+function destroyTitleScene() {
+	title_back.destroy();
+	title_text.destroy();
+	title_window.destroy();
+	title_jouer.destroy();
+}
+
+function titleToPlayTransition() {
+	destroyTitleScene();
+	createPlayScene();
+}
+
+function createPlayScene() {
+	play_back = game.add.image(0, 0, 'play_back');
+	//play_window = game.add.image(20, 0, 'play_window');
+
+	play_graphics = game.add.graphics(0, 0);
+	
+	createIntro1();
+	//createGapFillQuestion();
+	//createLesson();
+	//createDragAndDropQuestion();
+	/*button = game.add.sprite(930, 590, 'validationButton');
+	button.anchor.set(0.5, 0.5);
+	button.inputEnabled = true;
+	button.events.onInputDown.add(checkDragAndDropAnswers, this);*/
+}
+
+function createIntro1() {
+	video = game.add.video('nono0');
+	videoSprite = video.addToWorld(960, 500);
+	videoSprite.scale.setTo(.425, .425);
+	videoSprite.anchor.setTo(.5, .5);
+    playVideo(0);
+	
+	createTVCenter();
+	
+	welcome = game.add.audio('welcome');
+	welcome.play();
+	
+	//game.time.events.add(4200, intro1ToIntro2Transition, this);
+	game.time.events.add(4200, intro2ToLesson1Transition, this);
+}
+
+function intro1ToIntro2Transition() {
+	video.destroy();
+	videoSprite.destroy();
+	welcome.destroy();
+	tv.destroy();
+	
+	createIntro2();
+}
+
+function createIntro2() {
+	video = game.add.video('nono6');
+	//videoSprite = game.add.image(960, 500, video);
+	videoSprite = video.addToWorld(960, 500);
+	videoSprite.scale.setTo(.425, .425);
+	videoSprite.anchor.setTo(.5, .5);
+    video.play();
+	
+	createTVCenter();
+	
+	intro = game.add.audio('intro1');
+	intro.play();
+	
+	game.time.events.add(9000, intro2ToLesson1Transition, this);
+}
+
+function intro2ToLesson1Transition() {
+	//video.destroy();
+	//intro.destroy();
+	welcome.destroy();
+	
+	TVFromCenterToCorner();
+	
+	game.time.events.add(500, createEvent, this);
+}
+
+function TVFromCenterToCorner() {
+	game.add.tween(tv).to( { x: 1640, y: 100 }, 500, Phaser.Easing.Default, true);
+	game.add.tween(tv).to( { width: 1000/2, height: 1050/2 }, 500, Phaser.Easing.Default, true);
+	
+	game.add.tween(videoSprite).to( { x: 1640, y: 180 }, 500, Phaser.Easing.Default, true);
+	game.add.tween(videoSprite).to( { width: 408, height: 230 }, 500, Phaser.Easing.Default, true);
+}
+
+function createTVCenter() {
+	tv = game.add.image(960, 340, 'tv');
+	tv.anchor.setTo(.5, .5);
+	tv.scale.setTo(2, 1.75);
+}
+
+function createTVCorner() {
+	tv = game.add.image(1640, 100, 'tv');
+	tv.anchor.setTo(.5, .5);
+	tv.scale.setTo(1, .875);
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function playRandomVideo() {
+	//temp!
+	if (vidNum < 6) {
+		vidNum++;
+	}
+	else {
+		vidNum = 0;
+	}
+	
+	//var vidNum = getRandomInt(7)
+	
+	loadVideo(vidNum);
+	playVideo();
+
+	game.time.events.add(VIDEO_LENGTH[vidNum], playRandomVideo, this);
+}
+
+function loadVideo(vidNumber) {
+	if (typeof video !== "undefined") {
+		video.destroy();
+	}
+	video = game.add.video('nono' + vidNumber);
+	videoSprite.loadTexture(video);
+	console.log(vidNumber);
+}
+
+function playVideo() {
+	video.play();
+}
+
+//
+/*
+	LESSON
+	  FUNCTIONS
+*/
+//
+
+function createArrows() {
+	if (structure[eventID].next != null) {
+		nextArrow = game.add.sprite(1425, 825, 'arrow');
+		nextArrow.anchor.setTo(.5, .5);
+		nextArrow.inputEnabled = true;
+		nextArrow.events.onInputDown.add(next, this);
+	}
+	if (structure[eventID].previous != null) {
+		previousArrow = game.add.sprite(550, 825, 'arrow');
+		previousArrow.anchor.setTo(.5, .5);
+		previousArrow.angle = 180;
+		previousArrow.inputEnabled = true;
+		previousArrow.events.onInputDown.add(previous, this);
+	}
+}
+
+function destroyArrows() {
+	if (typeof nextArrow !== "undefined") {
+		nextArrow.destroy();
+	}
+	if (typeof previousArrow !== "undefined") {
+		previousArrow.destroy();
+	}
+}
+
+function destroyPlayWindow() {
+	if (typeof play_window !== "undefined") {
+		play_window.destroy();
+	}
+}
+
+function createEvent() {
+	switch (structure[eventID].category) {
+		case "lesson":
+			createLesson();
+			break;
+		case "quizz":
+			console.log('quizz');
+			//createQuizz();
+			break;
+	}
+}
+
+function destroyTempGraphics() {
+	clearText();
+	destroyPlayWindow();
+	destroyLessonImage();
+}
+
+function createLesson() {
+	destroyTempGraphics();
+
+	play_window = game.add.image(20, 0, 'play_window');
+	pageID = structure[eventID].id;
+	
+	//typewriteText();
+	writeText();
+	
+	playRandomVideo();
+}
+
+function createLessonImage() {
+	lessonImage = game.add.image(lesson[pageID][paragraphID].picture_x, lesson[pageID][paragraphID].picture_y, lesson[pageID][paragraphID].picture);
+	lessonImage.scale.setTo(.5, .5);
+}
+
+function destroyLessonImage() {
+	if (typeof lessonImage !== "undefined") {
+		lessonImage.destroy();
+	}
+}
+
+function next() {
+	destroyArrows();
+	eventID = structure[eventID].next;
+	createEvent();
+}
+
+function previous() {
+	destroyArrows();
+	eventID = structure[eventID].previous;
+	createEvent();
+}
+
+function clearText() {
+	for (var i in textHolder) {
+		textHolder[i].destroy();
+	}
+	textHolderLineID = 0;
+}
+
+function writeText() {
+	paragraphID = 0;
+	lineID = 0;
+	textHolderLineID = 0;
+	while (paragraphID < lesson[pageID].length) {
+		while (lineID < lesson[pageID][paragraphID].content.length) {
+			textHolder[textHolderLineID] = game.add.text(lesson[pageID][paragraphID].x, lesson[pageID][paragraphID].y+lineID*LINE_HEIGHT, lesson[pageID][paragraphID].content[lineID], { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
+			lineID++;
+			textHolderLineID++;
+		}
+		if (lesson[pageID][paragraphID].picture != null) {
+			createLessonImage();
+		}
+		lineID = 0;
+		paragraphID++;
+	}
+	createArrows();
+}
+
+function typewriteText() {
+	paragraphID = 0;
+	lineID = 0;
+	typewriteTextParagraph();
+}
+
+function typewriteTextParagraph() {
+	//if there's still lines to write in current paragraph, write new line
+	if (lineID < lesson[pageID][paragraphID].content.length) {
+		typewriteLetter(lesson[pageID][paragraphID].x, lesson[pageID][paragraphID].y+lineID*LINE_HEIGHT, lesson[pageID][paragraphID].content[lineID], "", 0);
+	}
+	//if all lines of current paragraph have been written
+	else {
+		//if there's still paragraphs to write, write new paragraph
+		if (paragraphID < lesson[pageID].length-1) {
+			lineID = 0;
+			paragraphID++;
+			typewriteTextParagraph();
+		}
+		//if there's no more paragraph to write, call end of text events
+		else {
+			createArrows();
+		}
+	}
+}
+
+function typewriteLetter(x, y, fullText, currentText, currentTextIndex) {
+	currentText += fullText[currentTextIndex];
+	
+	if (textHolder[textHolderLineID] != null) {
+		textHolder[textHolderLineID].destroy();
+	}
+	textHolder[textHolderLineID] = game.add.text(x, y, currentText, { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
+	
+	currentTextIndex++;
+	
+	if (currentTextIndex < fullText.length) {
+		game.time.events.add(TEXT_SPEED, typewriteLetter, this, x, y, fullText, currentText, currentTextIndex);
+	}
+	else {
+		lineID++;
+		textHolderLineID++;
+		typewriteTextParagraph();
+	}
+}
+
+//
+/*
+	DRAG AND DROP
+	  FUNCTIONS
+*/
+//
+
+function createDragAndDropQuestion() {
+	dragAndDrop = game.cache.getJSON('dragAndDrop');
+	
+	game.add.text(dragAndDrop[0].sentence.x, dragAndDrop[0].sentence.y, dragAndDrop[0].sentence.content, { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
+	
+	createDraggableTexts(0);
+	createDropSurfaces(0);
+	
+	//adds event listeners
+	for (i in draggableTexts) {
+		draggableTexts[i].events.onDragStart.add(unfixDraggableText);
+		draggableTexts[i].events.onDragStop.add(checkDropSurfaces);
+	}
+}
+
+//calls the creation of all draggable texts as defined in drag&drop.json
+function createDraggableTexts() {
+	for (i in dragAndDrop[questionID].draggableText) {
+		var draggableText = dragAndDrop[questionID].draggableText[i];
+		createDraggableText(draggableText);
+	}
+}
+
+//creates a draggable text and adds it to the draggableTexts array
+//sets the text property textID to the corresponding draggableText ID from drag&drop.json
+function createDraggableText(draggableText) {
+	var text = game.add.text(draggableText.x, draggableText.y, draggableText.content, { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
+	text.anchor.set(0.5, 0.5);
+	text.inputEnabled = true;
+	text.input.enableDrag();
+
+	for (i in dragAndDrop[questionID].draggableText) {
+		if (dragAndDrop[questionID].draggableText[i] == draggableText) {
+			text.textID = i;
+		}
+	}
+	
+	draggableTexts.push(text);
+}
+
+//calls the creation of all drop surfaces as defined in drag&drop.json
+//calls the drawing of each of those drop surfaces
+function createDropSurfaces() {
+	for (i in dragAndDrop[questionID].draggableText) {
+		var dropSurface = dragAndDrop[questionID].dropSurface[i];
+		createDropSurface(dropSurface);
+		drawDropSurface(dropSurface); //comment to disable drop surfaces rectangles
+	}
+}
+
+//creates a drop surface and adds it to the dropSurfaces array
+function createDropSurface(dropSurface) {
+	var dropSurfaceRect = new Phaser.Rectangle(dropSurface.x-DROP_SURFACE_WIDTH_OVERFLOW/2, dropSurface.y-DROP_SURFACE_HEIGHT_OVERFLOW/2, DROP_SURFACE_WIDTH + DROP_SURFACE_WIDTH_OVERFLOW, DROP_SURFACE_HEIGHT + DROP_SURFACE_HEIGHT_OVERFLOW);
+	dropSurfaces.push(dropSurfaceRect);
+}
+
+//draws a drop surface rectangle
+function drawDropSurface(dropSurface) {
+	play_graphics.beginFill(DROP_SURFACE_COLOR);
+	play_graphics.drawRect(dropSurface.x, dropSurface.y, DROP_SURFACE_WIDTH, DROP_SURFACE_HEIGHT);
+	play_graphics.endFill();
+}
+
+//check draggable text drop position against all drop surfaces
+function checkDropSurfaces(sprite, pointer) {
+	for (i in dropSurfaces) {
+		if ((pointer.x > dropSurfaces[i].x && pointer.x < dropSurfaces[i].x+dropSurfaces[i].width) && (pointer.y > dropSurfaces[i].y && pointer.y < dropSurfaces[i].y+dropSurfaces[i].height)) {
+			var dropSurface = dragAndDrop[questionID].dropSurface[i];
+			if (dropSurface.textID != null) {
+				resetDraggableText(dropSurface.textID);
+				unfixDraggableText(draggableTexts[dropSurface.textID]);
+			}
+			fixDraggableText(sprite, dropSurfaces[i].x, dropSurfaces[i].y, dropSurfaces[i].width, dropSurfaces[i].height, i);
+			return;
+		}
+	}
+}
+
+//fix a draggable text at the center of the drop surface it was dropped on
+function fixDraggableText(sprite, x, y, width, height, surfaceID) {
+	sprite.x = x+width/2;
+	sprite.y = y+height/2;
+	//sprite.fill = DRAGGABLE_TEXT_FIXED_FILL;
+	dragAndDrop[questionID].dropSurface[surfaceID].textID = sprite.textID;
+}
+
+//unfix a draggable text from a drop surface
+function unfixDraggableText(sprite) {
+	//sprite.fill = DRAGGABLE_TEXT_FILL;
+	for (i in dragAndDrop[questionID].dropSurface) {
+		var dropSurface = dragAndDrop[questionID].dropSurface[i];
+		if (dropSurface.textID == sprite.textID) {
+			dropSurface.textID = null;
+			break;
+		}
+	}
+}
+
+//resets a draggable text to its initial position
+function resetDraggableText(id) {
+	draggableTexts[id].x = dragAndDrop[questionID].draggableText[id].x;
+	draggableTexts[id].y = dragAndDrop[questionID].draggableText[id].y;
+}
+
+function checkDragAndDropAnswers() {
+	for (i in dragAndDrop[questionID].dropSurface) {
+		if (dragAndDrop[questionID].dropSurface[i].textID != i) {
+			console.log("false");
+			return false;
+		}
+	}
+	console.log("true");
+	return true;
+}
+
+function changeDragAndDropAnswersColor() {
+	for (i in dragAndDrop[questionID].dropSurface) {
+		if (dragAndDrop[questionID].dropSurface[i].textID == i) {
+			drag
+		}
+	}
+}
+
+//
+/*
+	GAP FILL
+	  FUNCTIONS
+*/
+//
+
+function createGapFillQuestion() {
+	//gapFill = game.cache.getJSON('gapFill');
+	
+	var txtTrouJSON = {0:"Missing    ",1:" doit ",2:"Missing  ",3:" faire, ",4:"Missing      ",5:"."};
+	var i = 0
+	txtTrouJSON[i].length = 0;
+	while (txtTrouJSON[i] != undefined){
+	  txtTrouJSON[i].length += 1;
+	  i ++;
+	}
+	txtTrouJSON.length = 6;
+	var txtTrou = "";
+	var state = 0;
+	var motsPourTxtTrou = {"Missing1":"Théo","Missing2":"le","Missing3":"Romain"};
+	
+	  //Launching physics system (ARCADE)
+  game.physics.startSystem(Phaser.Physics.ARCADE);
+  game.stage.backgroundColor = "#4488AA";
+
+for (var i = 0; i < txtTrouJSON.length ; i++){
+  if (!~txtTrouJSON[i].indexOf('Missing')){
+    txtTrou += txtTrouJSON[i];
+  }
+  else{
+    var x = document.createElement("TEXTAREA");
+    x.id = "Missing"+i;
+    x.placeholder="Remplis";
+    document.body.appendChild(x);
+    txtTrou += txtTrouJSON[i].replace('Missing','');
+    //console.log(x.id);
+  }
+}
+
+var text = game.add.text(380, 180, txtTrou, { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
+}
+
+</script>
 </html>

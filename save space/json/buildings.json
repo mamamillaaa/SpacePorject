@@ -1,0 +1,67 @@
+{
+    "Buildings": {
+        "Building1": {
+            "x": "100",
+            "y": "250",
+            "angle": "-20",
+            "picture": "batiment1.png",
+            "showable": true
+        },
+        "Building2": {
+            "x": "300",
+            "y": "250",
+            "angle": "-10",
+            "picture": "batiment2.png",
+            "showable": true,
+        },
+        "Building3": {
+            "x": "20",
+            "y": "390",
+            "angle": "-20",
+            "picture": "batiment3.png",
+            "showable": true,
+        },
+        "Building4": {
+            "x": "550",
+            "y": "225",
+            "angle": "3",
+            "picture": "batiment4.png",
+            "showable": true,
+        },
+        "Building5": {
+            "x": "500",
+            "y": "370",
+            "angle": "5",
+            "picture": "batiment5.png",
+            "showable": true,
+        },
+        "Building6": {
+            "x": "650",
+            "y": "230",
+            "angle": "10",
+            "picture": "batiment6.png",
+            "showable": true,
+        },
+        "Building7": {
+            "x": "800",
+            "y": "275",
+            "angle": "20",
+            "picture": "batiment7.png",
+            "showable": true,
+        },
+        "Building8": {
+            "x": "700",
+            "y": "350",
+            "angle": "10",
+            "picture": "batiment9.png",
+            "showable": true,
+        },
+        "Building9": {
+            "x": "300",
+            "y": "375",
+            "angle": "0",
+            "picture": "batiment8.png",
+            "showable": true,
+        },
+    }
+}

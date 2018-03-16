@@ -1,0 +1,15 @@
+[
+	{
+		"question": {
+			"x": coord x du texte (point haut gauche),
+			"y": coord y du texte (point haut gauche),
+			"content": ["Ceci est un tableau contenant une question",
+						"découpée en plusieurs lignes.",
+						"Chaque ligne doit faire grosso merdo cette taille",
+						"au maximum."]
+		},
+		"choices": ["choice1", "choice2", etc], (au moins un choix)
+		"answer": id de la réponse (dans le tableau choices),
+		"categories": ["category1", "category2", etc] chaque catégorie doit être une chaîne parmis "drag&drop", "gapFill", "QCM", il doit y avoir au moins une catégorie dans le tableau
+	}
+]

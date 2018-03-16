@@ -1,0 +1,32 @@
+textarea{
+  position:absolute;
+  z-index:1;
+  height:25px;
+  top:40px;
+  resize: none;
+  -webkit-appearance:none;
+  overflow: auto;
+  border: 1px solid #FFFFFF;
+	border-radius: 10px;
+  background-color:#4488AA;
+  font-family: "New Century Schoolbook", serif;
+}
+
+#Missing0{
+  left:140px;
+  width:90px;
+}
+
+#Missing2{
+  left:180px;
+  width:40px;
+}
+
+#Missing4{
+  left:330px;
+  width:130px;
+}
+
+canvas{
+  position:absolute;
+}
