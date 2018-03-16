@@ -33,6 +33,18 @@
 		"category": "lesson",
 		"id": 5,
 		"previous": 4,
-		"next": 0
+		"next": 6
+	},
+	{
+		"category": "lesson",
+		"id": 6,
+		"previous": 5,
+		"next": 7
+	},
+	{
+		"category": "lesson",
+		"id": 7,
+		"previous": 6,
+		"next": null
 	}
 ]

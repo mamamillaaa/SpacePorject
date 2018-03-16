@@ -1,12 +1,12 @@
 [
 	{
 		"question": {
-			"x": 380,
-			"y": 180,
+			"x": 460,
+			"y": 220,
 			"content": ["Quelle fleur est réputée pour suivre",
 						"la course du Soleil durant sa croissance ?"]
 		},
-		"choices": ["le pissenlit", "le tournesol", "la rose"],
+		"choices": ["le pissenlit", "le tournesol", "la rose", "la violette", "la marguerite"],
 		"answer": 1,
 		"categories": ["QCM"]
 	}
