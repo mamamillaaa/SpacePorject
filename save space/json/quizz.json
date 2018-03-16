@@ -9,5 +9,92 @@
 		"choices": ["le pissenlit", "le tournesol", "la rose", "la violette", "la marguerite"],
 		"answer": 1,
 		"categories": ["QCM"]
+	},
+	{
+		"question": {
+			"x": 460,
+			"y": 220,
+			"content": ["A combien estime-t-on le nombre de débris spatiaux mesurant entre 1 et 10 cm?"]
+		},
+		"choices": ["600000", "300000", "2", "1200000", "150000"],
+		"answer": 1,
+		"categories": ["QCM"]
+	}
+	,
+	{
+		"question": {
+			"x": 460,
+			"y": 220,
+			"content": ["A quelle vitesse peuvent aller les débris spatiaux artificiels?"]
+		},
+		"choices": ["40m/s", "20m/s", "20km/s", "40km/s", "10km/s"],
+		"answer": 2,
+		"categories": ["QCM"]
+	}
+	,
+	{
+		"question": {
+			"x": 460,
+			"y": 220,
+			"content": ["En 50 ans d'activité spatiale, combien de satellites ont ils été placés en orbite ?"]
+		},
+		"choices": ["4", "- de 1000", "+ de 10000", "- de 5500", "+ de 5500"],
+		"answer": 4,
+		"categories": ["QCM"]
+	}
+	,
+	{
+		"question": {
+			"x": 460,
+			"y": 220,
+			"content": ["Quelle épaisseur de blindage perfore une particule d'un millimètre?"]
+		},
+		"choices": ["4 millimètres", "1 millimètres", "10 millimètres", "100 millimètres", "0 millimètres"],
+		"answer": 0,
+		"categories": ["QCM"]
+	}
+	,
+	{
+		"question": {
+			"x": 460,
+			"y": 220,
+			"content": ["Quels objets représentent le plus grand danger?"]
+		},
+		"choices": ["Les objets de 1-10 cm", "Les objets de 0.5 cm", "Les objets de 10-20 cm", "Les objets de 1-10 mm", "Les objets en mousse"],
+		"answer": 0,
+		"categories": ["QCM"]
+	}
+	,
+	{
+		"question": {
+			"x": 460,
+			"y": 220,
+			"content": ["Quand une particule de 1 cm frappe un satellite, a quoi peut on comparer l'énergie dégagée?"]
+		},
+		"choices": ["Un coup d'épée", "Une flèche", "Une grenade", "Une biche", "Un fromage"],
+		"answer": 2,
+		"categories": ["QCM"]
+	}
+	,
+	{
+		"question": {
+			"x": 460,
+			"y": 220,
+			"content": ["Quel épaisseur de blindage résiste à une particule de plus de 2 cm?"]
+		},
+		"choices": ["Aucune. BIM.", "1 cm", "1 mm", "0.5 cm", "L'épaisseur de blindage de la fusée Arianne 1"],
+		"answer": 0,
+		"categories": ["QCM"]
+	}
+	,
+	{
+		"question": {
+			"x": 460,
+			"y": 220,
+			"content": ["Combien de fois l'ISS a du faire de manoeuvre d'évitement en 2015?"]
+		},
+		"choices": ["Aucune. BIM.", "L'ISS ?", "0 fois", "5 fois", "50 fois"],
+		"answer": 3,
+		"categories": ["QCM"]
 	}
 ]

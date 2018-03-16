@@ -167,8 +167,9 @@ function createPlayScene() {
 
 	play_graphics = game.add.graphics(0, 0);
 
-	createIntro1();
-	//build();
+	//
+	build();
+	
 	//createGapFillQuestion();
 	//createLesson();
 	//createDragAndDropQuestion();
@@ -190,8 +191,8 @@ function createIntro1() {
 	welcome = game.add.audio('welcome');
 	welcome.play();
 
-	//game.time.events.add(4200, intro1ToIntro2Transition, this);
-	game.time.events.add(4200, intro2ToLesson1Transition, this);
+	game.time.events.add(4200, intro1ToIntro2Transition, this);
+	//game.time.events.add(4200, intro2ToLesson1Transition, this);
 }
 
 function fuseeMove(){
@@ -204,6 +205,7 @@ function fuseeMove(){
 function fuseeStop(){
 	fuse.stop();
 	fusee.frame = 0;
+	game.time.events.add(200, createIntro1, this);
 }
 
 function build(){
@@ -250,8 +252,8 @@ function createIntro2() {
 
 function intro2ToLesson1Transition() {
 	//video.destroy();
-	//intro.destroy();
-	welcome.destroy();
+	intro.destroy();
+	//welcome.destroy();
 
 	TVFromCenterToCorner();
 	playRandomVideo();
@@ -306,13 +308,12 @@ function loadVideo(vidNumber) {
 	}
 	video = game.add.video('nono' + vidNumber);
 	videoSprite.loadTexture(video);
-	console.log(vidNumber);
 }
 
 function handlePointerDown(pointer) {
-	for (area in clickableAreas) {
-		if (area.contains(pointer.x, pointer.y)) {
-			dummy();
+	for (a in clickableAreas) {
+		if (clickableAreas[a].contains(pointer.x, pointer.y)) {
+			checkAnswer(clickableAreas[a].id);
 		}
 	}
 }
@@ -363,11 +364,9 @@ function createEvent() {
 	switch (structure[eventID].category) {
 		case "lesson":
 			createLesson();
-			//createQuizz();
 			break;
 		case "quizz":
-			console.log('quizz');
-			//createQuizz();
+			createQuizz();
 			break;
 	}
 }
@@ -443,17 +442,27 @@ function writeQuizzAnswers() {
 		textHolder[textHolderLineID] = game.add.text(500+(a%3)*400+(a>2)*200, 400+(a>2)*LINE_HEIGHT*2, quizz[pageID].choices[a], { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
 		lineID++;
 		textHolderLineID++;
-		createClickableArea(500, 400, 200, 50);
+		createClickableArea(480+(a%3)*400+(a>2)*200, 380+(a>2)*LINE_HEIGHT*2, 22*(quizz[pageID].choices[a]).length, 60, a);
 	}
 }
 
-function createClickableArea(x, y, w, h) {
+function createClickableArea(x, y, w, h, id) {
 	var clickableArea = new Phaser.Rectangle(x, y, w, h);
 	clickableAreas.push(clickableArea);
+	clickableArea.id = id;
 }
 
 function dummy() {
 	console.log("dummy");
+}
+
+function checkAnswer(playerChoice) {
+	if (quizz[pageID].answer == playerChoice) {
+		console.log("bjbj");
+	}
+	else {
+		console.log("nope");
+	}
 }
 
 function writeText() {
@@ -503,13 +512,13 @@ function typewriteTextParagraph() {
 
 function typewriteLetter(x, y, fullText, currentText, currentTextIndex) {
 	currentText += fullText[currentTextIndex];
-	
+
 	if (textHolder[textHolderLineID] != null) {
 		textHolder[textHolderLineID].destroy();
 	}
 	textHolder[textHolderLineID] = game.add.text(x, y, currentText, { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
+
 	currentTextIndex++;
-	
 
 	if (currentTextIndex < fullText.length) {
 		game.time.events.add(TEXT_SPEED, typewriteLetter, this, x, y, fullText, currentText, currentTextIndex);
