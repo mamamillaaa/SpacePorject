@@ -15,7 +15,7 @@
 
 		{
 			"x": 920,
-			"y": 540,
+			"y": 520,
 			"content": ["Ces objets représentent également",
 						"un risque sur Terre, en cas",
 						"de retombée de morceaux au sol."],
@@ -53,7 +53,7 @@
 			"x": 380,
 			"y": 180,
 			"content": ["Depuis les débuts de la conquête spatiale",
-						"l'activité humaine a entraîné la production dans l'Espace",
+						"l'activité humaine a entraîné la production dans l'espace",
 						"d'un très grand nombre d'objets de toutes tailles."],
 			"picture": "lesson21",
 			"picture_x": 380,
@@ -65,7 +65,7 @@
 			"y": 400,
 			"content": ["En effet, en plus des très nombreux",
 									"satellites, divers objets ont été mis",
-									"sur orbite. étages supérieurs de",
+									"sur orbite. Etages supérieurs de",
 									"lanceurs, moteurs d’appoint..."],
 			"picture": null,
 			"picture_x": null,
@@ -77,12 +77,13 @@
 		{
 			"x": 380,
 			"y": 180,
-			"content": ["Une fois leur vie achevée, ces objets restent sur orbite",
-						"si jamais ils se percutent, ils génèrent de nombreux fragments",
-						"qui créent ensuite un réel risques pour les autres objets"],
+			"content": ["Une fois leur vie achevée, ces objets restent sur orbite.",
+						"Si jamais ils se percutent, ils génèrent de nombreux fragments",
+						"qui créent ensuite un réel risque pour les autres engins",
+						"spatiaux."],
 			"picture": "lesson22",
-			"picture_x": 610,
-			"picture_y": 375
+			"picture_x": 600,
+			"picture_y": 350
 		},
 
 		{
@@ -100,13 +101,13 @@
 		{
 			"x": 380,
 			"y": 180,
-			"content": ["En orbite, la vitesse de ces objets peut atteindre 28000 km/h.",
-						"les dégats provoqués par une de ces particules peuvent",
-						"être considérables: actuellement aucun blindage n'y résiste,",
-						"et le scaphandre d'un spationaute est bien plus fragile!"],
+			"content": ["En orbite, la vitesse de ces objets peut atteindre 28000km/h.",
+						"Les dégats provoqués par une de ces particules peuvent",
+						"être considérables : actuellement aucun blindage n'y résiste.",
+						"Et le scaphandre d'un spationaute est bien plus fragile !"],
 			"picture": "lesson31",
 			"picture_x": 400,
-			"picture_y": 400
+			"picture_y": 410
 		},
 
 		{
@@ -137,7 +138,7 @@
 									"les débris."],
 			"picture": "lesson32",
 			"picture_x": 400,
-			"picture_y": 450
+			"picture_y": 400
 		},
 
 		{
@@ -146,7 +147,7 @@
 			"content": ["Cela consiste, par exemple, a mettre",
 									"sur une orbite cimetière les",
 									"satellites en fin de vie.",
-									"Un organisme, issu de la",
+									"Un organisme issu de la",
 									"collaboration entre les différents",
 									"pays décris les mesures à appliquer.",
 									"Il s'agit de l'IDAC."],
@@ -161,12 +162,12 @@
 			"x": 380,
 			"y": 180,
 			"content": ["Niveau protection, les satellites sont équipés de blindages.",
-									"et la conception des satellites est fait de telle sorte ",
-									"à proteger les équipements fragiles",
-									"en les plaçant vers l'intérieur du satellite"],
-			"picture": "lesson41",
-			"picture_x": 600,
-			"picture_y": 430
+									"La conception des satellites est faite de telle sorte ",
+									"à proteger les équipements fragiles en les",
+									"plaçant vers l'intérieur du satellite."],
+			"picture": "lesson42",
+			"picture_x": 610,
+			"picture_y": 380
 		},
 
 		{
@@ -183,14 +184,13 @@
 		{
 			"x": 380,
 			"y": 180,
-			"content": ["Niveau résolution du problème",
-						"de nombreux projets sont à l'études,",
-						"avec par exemple un filet pour capturer les débris",
-						"et les envoyer ensuite dans l'atmosphère!",
+			"content": ["Niveau résolution du problème de nombreux projets",
+						"sont à l'étude, avec par exemple un filet pour capturer",
+						"les débris et les envoyer ensuite dans l'atmosphère !",
 						"On imagine aussi des boules d'aérogel pour absorber les impacts..."],
-			"picture": "lesson42",
-			"picture_x": 600,
-			"picture_y": 450
+			"picture": "lesson41",
+			"picture_x": 680,
+			"picture_y": 420
 		},
 
 		{

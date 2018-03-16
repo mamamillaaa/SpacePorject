@@ -111,7 +111,11 @@ function preload() {
 
 	game.load.audio('welcome', 'assets/audio/welcome.mp3');
 	game.load.audio('intro1', 'assets/audio/intro1.mp3');
+<<<<<<< HEAD
     game.load.audio('fondmusic', 'assets/audio/fond.mp3');
+=======
+	game.load.audio('end', 'assets/audio/end.mp3');
+>>>>>>> dbe291001b76d1398b1de855eaa0bc324ca00deb
 }
 
 function create() {
@@ -120,12 +124,16 @@ function create() {
 	game.scale.pageAlignVertically = true;
 	game.scale.setShowAll();
 	game.scale.refresh();
-	
+
 	game.input.onDown.add(handlePointerDown);
+<<<<<<< HEAD
     
     musfond=game.add.audio('fondmusic');
     musfond.play();
 	
+=======
+
+>>>>>>> dbe291001b76d1398b1de855eaa0bc324ca00deb
 	//createPlayScene();
 	structure = game.cache.getJSON('gameStructure');
 	quizz = game.cache.getJSON('quizz');
@@ -164,7 +172,7 @@ function titleToPlayTransition() {
 function createPlayScene() {
 	play_back = game.add.image(0, 0, 'play_back');
 	//play_window = game.add.image(20, 0, 'play_window');
-
+	buildingsGroup = game.add.group();
 	play_graphics = game.add.graphics(0, 0);
 
 	//
@@ -215,6 +223,7 @@ function build(){
 			buildings[i] = game.add.sprite((buildingsJson.Buildings[i].Building.x)*1.92+200, ((buildingsJson.Buildings[i].Building.y)*1.35)+550, "building"+(i+1));
 			buildings[i].anchor.setTo(0.5,1);
 			buildings[i].angle = buildingsJson.Buildings[i].Building.angle;
+			buildingsGroup.add(buildings[i]);
 		}
   }
 	if (typeof(fusee) == "undefined"){
@@ -257,8 +266,19 @@ function intro2ToLesson1Transition() {
 
 	TVFromCenterToCorner();
 	playRandomVideo();
-	
+
 	game.time.events.add(500, createEvent, this);
+}
+
+function lesson2Transition() {
+	TVFromCornerToCenter();
+	
+	game.time.events.add(500, lesson2End, this);
+}
+
+function lesson2End() {
+	TVFromCenterToCorner();
+	playRandomVideo();
 }
 
 function TVFromCenterToCorner() {
@@ -267,6 +287,14 @@ function TVFromCenterToCorner() {
 
 	game.add.tween(videoSprite).to( { x: 1640, y: 180 }, 500, Phaser.Easing.Default, true);
 	game.add.tween(videoSprite).to( { width: 408, height: 230 }, 500, Phaser.Easing.Default, true);
+}
+
+function TVFromCornerToCenter() {
+	game.add.tween(tv).to( { x: 960, y: 340 }, 500, Phaser.Easing.Default, true);
+	game.add.tween(tv).to( { width: 1000, height: 1050 }, 500, Phaser.Easing.Default, true);
+
+	game.add.tween(videoSprite).to( { x: 960, y: 500 }, 500, Phaser.Easing.Default, true);
+	game.add.tween(videoSprite).to( { width: 816, height: 459 }, 500, Phaser.Easing.Default, true);
 }
 
 function createTVCenter() {
@@ -368,6 +396,9 @@ function createEvent() {
 		case "quizz":
 			createQuizz();
 			break;
+		case "end":
+			endGame();
+			break;
 	}
 }
 
@@ -381,7 +412,7 @@ function createLesson() {
 	destroyTempGraphics();
 
 	play_window = game.add.image(20, 0, 'play_window');
-	
+
 	pageID = structure[eventID].id;
 
 	//typewriteText();
@@ -390,11 +421,22 @@ function createLesson() {
 
 function createQuizz() {
 	destroyTempGraphics();
-	
+
 	play_window = game.add.image(20, 0, 'play_window');
 	
+	pageID = structure[eventID].id;
+
 	writeQuizzQuestion();
 	writeQuizzAnswers();
+}
+
+function endGame() {
+	destroyTempGraphics();
+
+	TVFromCornerToCenter();
+	
+	end = game.add.audio('end');
+	end.play();
 }
 
 function createLessonImage() {
@@ -410,6 +452,7 @@ function destroyLessonImage() {
 
 function next() {
 	destroyArrows();
+	console.log(structure[eventID].next);
 	eventID = structure[eventID].next;
 	createEvent();
 }
@@ -458,11 +501,16 @@ function dummy() {
 
 function checkAnswer(playerChoice) {
 	if (quizz[pageID].answer == playerChoice) {
-		console.log("bjbj");
+		console.log("yep");
+		buildingsJson.Buildings[pageID+1].Building.showable = true;
+		build();
+		next();
 	}
 	else {
 		console.log("nope");
+		next();
 	}
+	playerChoice == null;
 }
 
 function writeText() {
