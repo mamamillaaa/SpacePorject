@@ -12,7 +12,7 @@
 			"picture_x": 400,
 			"picture_y": 450
 		},
-		
+
 		{
 			"x": 920,
 			"y": 540,
@@ -24,7 +24,7 @@
 			"picture_y": null
 		}
 	],
-	
+
 	[
 		{
 			"x": 380,
@@ -36,7 +36,7 @@
 			"picture_x": 680,
 			"picture_y": 375
 		},
-		
+
 		{
 			"x": 380,
 			"y": 680,
@@ -47,7 +47,7 @@
 			"picture_y": null
 		}
 	],
-	
+
 	[
 		{
 			"x": 380,
@@ -56,16 +56,17 @@
 						"l'activité humaine a entraîné la production dans l'Espace",
 						"d'un très grand nombre d'objets de toutes tailles."],
 			"picture": "lesson21",
-			"picture_x": 400,
-			"picture_y": 450
+			"picture_x": 380,
+			"picture_y": 380
 		},
-		
+
 		{
-			"x": 920,
-			"y": 540,
-			"content": ["En effet, en plus des très nombreux satellites,",
-						"divers objets ont été mis sur orbite.",
-						"étages supérieurs de lanceurs, moteurs d’appoint..."],
+			"x": 930,
+			"y": 400,
+			"content": ["En effet, en plus des très nombreux",
+									"satellites, divers objets ont été mis",
+									"sur orbite. étages supérieurs de",
+									"lanceurs, moteurs d’appoint..."],
 			"picture": null,
 			"picture_x": null,
 			"picture_y": null
@@ -80,10 +81,10 @@
 						"si jamais ils se percutent, ils génèrent de nombreux fragments",
 						"qui créent ensuite un réel risques pour les autres objets"],
 			"picture": "lesson22",
-			"picture_x": 680,
+			"picture_x": 610,
 			"picture_y": 375
 		},
-		
+
 		{
 			"x": 380,
 			"y": 680,
@@ -100,22 +101,26 @@
 			"x": 380,
 			"y": 180,
 			"content": ["En orbite, la vitesse de ces objets peut atteindre 28000 km/h.",
-						"les dégats provoqués par une de ces particules",
-						"peuvent être considérables: actuellement aucun blindage n'y résiste,",
+						"les dégats provoqués par une de ces particules peuvent",
+						"être considérables: actuellement aucun blindage n'y résiste,",
 						"et le scaphandre d'un spationaute est bien plus fragile!"],
 			"picture": "lesson31",
 			"picture_x": 400,
-			"picture_y": 450
+			"picture_y": 400
 		},
-		
+
 		{
 			"x": 920,
-			"y": 540,
-			"content": ["Au sol, les risques existent aussi, même si une partie des satellites",
-						"se désintègrent en traversant l'atmosphère.",
-						"Mais certains matériaux comme le titane resistent très bien à ces conditions",
-						"et les parties qui en sont constituées peuvent atteindre le sol."],
-			"picture": "lesson32",
+			"y": 400,
+			"content": ["Au sol, les risques existent aussi,",
+									"même si une partie des satellites",
+									"se désintègrent en traversant",
+									"l'atmosphère. Mais certains matériaux",
+									"comme le titane resistent très bien à",
+									"ces conditions et les parties qui en",
+									"sont constituées peuvent atteindre",
+									"le sol."],
+			"picture": null,
 			"picture_x": null,
 			"picture_y": null
 		}
@@ -126,22 +131,25 @@
 			"x": 380,
 			"y": 180,
 			"content": ["On peut séparer les solutions en trois parties.",
-						"La prévention, la protection,",
-						"et la résolution du problème.",
-						"Au niveau de la prévention, les principaux acteurs du domaine",
-						" ont commencé à prendre des mesures préventives pour réduire les débris."],
-			"picture": "lesson41",
+									"La prévention, la protection, et la résolution du problème.",
+									"Au niveau de la prévention, les principaux acteurs du domaine",
+									"ont commencé à prendre des mesures préventives pour réduire",
+									"les débris."],
+			"picture": "lesson32",
 			"picture_x": 400,
 			"picture_y": 450
 		},
-		
+
 		{
-			"x": 920,
-			"y": 540,
-			"content": ["Cela consiste, par exemple, a mettre sur une orbite cimetière ",
-						"les satellites en fin de vie.",
-						"Un organisme, issu de la collaboration entre les différents pays",
-						"décris les mesures à appliquer. Il s'agit de l'IDAC."],
+			"x": 950,
+			"y": 450,
+			"content": ["Cela consiste, par exemple, a mettre",
+									"sur une orbite cimetière les",
+									"satellites en fin de vie.",
+									"Un organisme, issu de la",
+									"collaboration entre les différents",
+									"pays décris les mesures à appliquer.",
+									"Il s'agit de l'IDAC."],
 			"picture": null,
 			"picture_x": null,
 			"picture_y": null
@@ -153,14 +161,14 @@
 			"x": 380,
 			"y": 180,
 			"content": ["Niveau protection, les satellites sont équipés de blindages.",
-						"et la conception des satellites est fait de telle sorte ",
-						"à proteger les équipements fragiles",
-						" en les plaçant vers l'intérieur du satellite"],
-			"picture": "lesson42",
-			"picture_x": 400,
-			"picture_y": 450
+									"et la conception des satellites est fait de telle sorte ",
+									"à proteger les équipements fragiles",
+									"en les plaçant vers l'intérieur du satellite"],
+			"picture": "lesson41",
+			"picture_x": 600,
+			"picture_y": 430
 		},
-		
+
 		{
 			"x": 920,
 			"y": 540,
@@ -180,11 +188,11 @@
 						"avec par exemple un filet pour capturer les débris",
 						"et les envoyer ensuite dans l'atmosphère!",
 						"On imagine aussi des boules d'aérogel pour absorber les impacts..."],
-			"picture": "lesson41",
-			"picture_x": 400,
+			"picture": "lesson42",
+			"picture_x": 600,
 			"picture_y": 450
 		},
-		
+
 		{
 			"x": 920,
 			"y": 540,
