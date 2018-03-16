@@ -55,6 +55,8 @@ var lineID = 0;
 var buildings = [];
 
 var fusee;
+    
+var musfond;
 
  VIDEO_LENGTH = [4200, 4200, 8200, 11200, 6200, 14200, 8200];
 
@@ -109,6 +111,7 @@ function preload() {
 
 	game.load.audio('welcome', 'assets/audio/welcome.mp3');
 	game.load.audio('intro1', 'assets/audio/intro1.mp3');
+    game.load.audio('fondmusic', 'assets/audio/fond.mp3');
 }
 
 function create() {
@@ -119,6 +122,9 @@ function create() {
 	game.scale.refresh();
 	
 	game.input.onDown.add(handlePointerDown);
+    
+    musfond=game.add.audio('fondmusic');
+    musfond.play();
 	
 	//createPlayScene();
 	structure = game.cache.getJSON('gameStructure');
