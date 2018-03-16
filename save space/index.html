@@ -21,7 +21,7 @@ const DROP_SURFACE_WIDTH = 240;
 const DROP_SURFACE_HEIGHT = 60;
 //width and height around the drop surface rectangle for which the drop is still valid
 const DROP_SURFACE_WIDTH_OVERFLOW = DROP_SURFACE_WIDTH/3;
-const DROP_SURFACE_HEIGHT_OVERFLOW = DROP_SURFACE_HEIGHT/3; 
+const DROP_SURFACE_HEIGHT_OVERFLOW = DROP_SURFACE_HEIGHT/3;
 
 const DRAGGABLE_TEXT_HEIGHT = 32;
 const DRAGGABLE_TEXT_FONT = DRAGGABLE_TEXT_HEIGHT.toString() + "px Courier";
@@ -52,6 +52,8 @@ var pageID = 0;
 var paragraphID = 0;
 var lineID = 0;
 
+var buildings = [];
+
  VIDEO_LENGTH = [4200, 4200, 8200, 11200, 6200, 14200, 8200];
 
 
@@ -64,8 +66,8 @@ function preload() {
 	game.load.image('play_back', 'assets/image/play/back.png');
 	game.load.image('play_window', 'assets/image/play/window.png');
 	game.load.image('arrow', 'assets/image/play/arrow.png');
-	game.load.image('tv', 'assets/image/play/tv.png'); 
-	
+	game.load.image('tv', 'assets/image/play/tv.png');
+
 	game.load.image('lesson11', 'assets/image/lesson/cours11.jpg');
 	game.load.image('lesson12', 'assets/image/lesson/cours12.jpg');
 	game.load.image('lesson21', 'assets/image/lesson/cours21.jpg');
@@ -74,14 +76,25 @@ function preload() {
 	game.load.image('lesson32', 'assets/image/lesson/cours32.jpg');
 	game.load.image('lesson41', 'assets/image/lesson/cours41.jpg');
 	game.load.image('lesson42', 'assets/image/lesson/cours42.jpg');
-	
+
+	game.load.image('building1','assets/image/buildings/batiment1.png');
+	game.load.image('building2','assets/image/buildings/batiment2.png');
+	game.load.image('building3','assets/image/buildings/batiment3.png');
+	game.load.image('building4','assets/image/buildings/batiment4.png');
+	game.load.image('building5','assets/image/buildings/batiment5.png');
+	game.load.image('building6','assets/image/buildings/batiment6.png');
+	game.load.image('building7','assets/image/buildings/batiment7.png');
+	game.load.image('building8','assets/image/buildings/batiment8.png');
+	game.load.image('building9','assets/image/buildings/batiment9.png');
+
 	//game.load.image('validationButton', 'validation_button.png');
-	
+
 	game.load.json('gameStructure', 'json/gameStructure.json');
 	game.load.json('quizz', 'json/quizz.json');
 	game.load.json('lesson', 'json/lesson.json');
 	game.load.json('dragAndDrop', 'json/drag&drop.json');
-	
+	game.load.json('buildingsJson', 'json/buildings.json');
+
 	game.load.video('nono0', 'assets/video/nono_0.mp4');
 	game.load.video('nono1', 'assets/video/nono_1.mp4');
 	game.load.video('nono2', 'assets/video/nono_2.mp4');
@@ -89,7 +102,7 @@ function preload() {
 	game.load.video('nono4', 'assets/video/nono_4.mp4');
 	game.load.video('nono5', 'assets/video/nono_5.mp4');
 	game.load.video('nono6', 'assets/video/nono_6.mp4');
-	
+
 	game.load.audio('welcome', 'assets/audio/welcome.mp3');
 	game.load.audio('intro1', 'assets/audio/intro1.mp3');
 }
@@ -100,7 +113,7 @@ function create() {
 	game.scale.pageAlignVertically = true;
 	game.scale.setShowAll();
 	game.scale.refresh();
-	
+
 	//createPlayScene();
 	structure = game.cache.getJSON('gameStructure');
 	//quizz = game.cache.getJSON('quizz');
@@ -118,7 +131,7 @@ function createTitleScene() {
 	title_text = game.add.image(359, 50, 'title_text');
 	title_window = game.add.image(510, 260, 'title_window');
 	title_jouer = game.add.image(597, 360, 'button_play');
-	
+
 	title_jouer.inputEnabled = true;
 	title_jouer.events.onInputDown.add(titleToPlayTransition, this);
 }
@@ -133,6 +146,7 @@ function destroyTitleScene() {
 function titleToPlayTransition() {
 	destroyTitleScene();
 	createPlayScene();
+	//build();
 }
 
 function createPlayScene() {
@@ -140,8 +154,9 @@ function createPlayScene() {
 	//play_window = game.add.image(20, 0, 'play_window');
 
 	play_graphics = game.add.graphics(0, 0);
-	
-	createIntro1();
+
+	//createIntro1();
+	build();
 	//createGapFillQuestion();
 	//createLesson();
 	//createDragAndDropQuestion();
@@ -157,14 +172,23 @@ function createIntro1() {
 	videoSprite.scale.setTo(.425, .425);
 	videoSprite.anchor.setTo(.5, .5);
     playVideo(0);
-	
+
 	createTVCenter();
-	
+
 	welcome = game.add.audio('welcome');
 	welcome.play();
-	
+
 	//game.time.events.add(4200, intro1ToIntro2Transition, this);
 	game.time.events.add(4200, intro2ToLesson1Transition, this);
+}
+
+function build(){
+  buildingsJson = game.cache.getJSON('buildingsJson');
+	for (var i=0; i <= 8; i++){
+    buildings[i] = game.add.sprite((buildingsJson.Buildings[i].Building.x)*1.92+200, ((buildingsJson.Buildings[i].Building.y)*1.35)+550, "building"+(i+1));
+		buildings[i].anchor.setTo(0.5,1);
+		buildings[i].angle = buildingsJson.Buildings[i].Building.angle;
+  }
 }
 
 function intro1ToIntro2Transition() {
@@ -172,7 +196,7 @@ function intro1ToIntro2Transition() {
 	videoSprite.destroy();
 	welcome.destroy();
 	tv.destroy();
-	
+
 	createIntro2();
 }
 
@@ -183,12 +207,12 @@ function createIntro2() {
 	videoSprite.scale.setTo(.425, .425);
 	videoSprite.anchor.setTo(.5, .5);
     video.play();
-	
+
 	createTVCenter();
-	
+
 	intro = game.add.audio('intro1');
 	intro.play();
-	
+
 	game.time.events.add(9000, intro2ToLesson1Transition, this);
 }
 
@@ -196,16 +220,16 @@ function intro2ToLesson1Transition() {
 	//video.destroy();
 	//intro.destroy();
 	welcome.destroy();
-	
+
 	TVFromCenterToCorner();
-	
+
 	game.time.events.add(500, createEvent, this);
 }
 
 function TVFromCenterToCorner() {
 	game.add.tween(tv).to( { x: 1640, y: 100 }, 500, Phaser.Easing.Default, true);
 	game.add.tween(tv).to( { width: 1000/2, height: 1050/2 }, 500, Phaser.Easing.Default, true);
-	
+
 	game.add.tween(videoSprite).to( { x: 1640, y: 180 }, 500, Phaser.Easing.Default, true);
 	game.add.tween(videoSprite).to( { width: 408, height: 230 }, 500, Phaser.Easing.Default, true);
 }
@@ -234,9 +258,9 @@ function playRandomVideo() {
 	else {
 		vidNum = 0;
 	}
-	
+
 	//var vidNum = getRandomInt(7)
-	
+
 	loadVideo(vidNum);
 	playVideo();
 
@@ -317,10 +341,10 @@ function createLesson() {
 
 	play_window = game.add.image(20, 0, 'play_window');
 	pageID = structure[eventID].id;
-	
+
 	//typewriteText();
 	writeText();
-	
+
 	playRandomVideo();
 }
 
@@ -352,6 +376,24 @@ function clearText() {
 		textHolder[i].destroy();
 	}
 	textHolderLineID = 0;
+}
+
+function writeQuizzQuestion() {
+	lineID = 0;
+	textHolderLineID = 0;
+	while (lineID < quizz[pageID].question.content.length) {
+		textHolder[textHolderLineID] = game.add.text(quizz[pageID].question.x, quizz[pageID].question.y+lineID*LINE_HEIGHT, quizz[pageID].question.content[lineID], { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
+		lineID++;
+		textHolderLineID++;
+	}
+}
+
+function writeQuizzAnswers() {
+	for (a in quizz[pageID].choices) {
+		textHolder[textHolderLineID] = game.add.text(500+a*400+(a>3)*200, 400+(a%3)*LINE_HEIGHT, quizz[pageID].choices[a], { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
+		lineID++;
+		textHolderLineID++;
+	}
 }
 
 function writeText() {
@@ -401,14 +443,14 @@ function typewriteTextParagraph() {
 
 function typewriteLetter(x, y, fullText, currentText, currentTextIndex) {
 	currentText += fullText[currentTextIndex];
-	
+
 	if (textHolder[textHolderLineID] != null) {
 		textHolder[textHolderLineID].destroy();
 	}
 	textHolder[textHolderLineID] = game.add.text(x, y, currentText, { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
-	
+
 	currentTextIndex++;
-	
+
 	if (currentTextIndex < fullText.length) {
 		game.time.events.add(TEXT_SPEED, typewriteLetter, this, x, y, fullText, currentText, currentTextIndex);
 	}
@@ -428,12 +470,12 @@ function typewriteLetter(x, y, fullText, currentText, currentTextIndex) {
 
 function createDragAndDropQuestion() {
 	dragAndDrop = game.cache.getJSON('dragAndDrop');
-	
+
 	game.add.text(dragAndDrop[0].sentence.x, dragAndDrop[0].sentence.y, dragAndDrop[0].sentence.content, { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
-	
+
 	createDraggableTexts(0);
 	createDropSurfaces(0);
-	
+
 	//adds event listeners
 	for (i in draggableTexts) {
 		draggableTexts[i].events.onDragStart.add(unfixDraggableText);
@@ -462,7 +504,7 @@ function createDraggableText(draggableText) {
 			text.textID = i;
 		}
 	}
-	
+
 	draggableTexts.push(text);
 }
 
@@ -558,7 +600,7 @@ function changeDragAndDropAnswersColor() {
 
 function createGapFillQuestion() {
 	//gapFill = game.cache.getJSON('gapFill');
-	
+
 	var txtTrouJSON = {0:"Missing    ",1:" doit ",2:"Missing  ",3:" faire, ",4:"Missing      ",5:"."};
 	var i = 0
 	txtTrouJSON[i].length = 0;
@@ -570,7 +612,7 @@ function createGapFillQuestion() {
 	var txtTrou = "";
 	var state = 0;
 	var motsPourTxtTrou = {"Missing1":"Théo","Missing2":"le","Missing3":"Romain"};
-	
+
 	  //Launching physics system (ARCADE)
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.stage.backgroundColor = "#4488AA";
