@@ -12,7 +12,6 @@
 
 var game = new Phaser.Game(1920, 1080, Phaser.AUTO, 'Projet Space', { preload: preload, create: create }, true);
 
-
 const BACKGROUND_COLOR = 0xEEEEEE;
 
 const DROP_SURFACE_COLOR = 0xBBBBBB;
@@ -40,6 +39,7 @@ var eventID = FIRST_EVENT_ID;
 
 var draggableTexts = [];
 var dropSurfaces = [];
+var clickableAreas = [];
 
 var questionID = 0;
 
@@ -101,9 +101,11 @@ function create() {
 	game.scale.setShowAll();
 	game.scale.refresh();
 	
+	game.input.onDown.add(handlePointerDown);
+	
 	//createPlayScene();
 	structure = game.cache.getJSON('gameStructure');
-	//quizz = game.cache.getJSON('quizz');
+	quizz = game.cache.getJSON('quizz');
 	lesson = game.cache.getJSON('lesson');
 	createTitleScene();
 }
@@ -198,6 +200,7 @@ function intro2ToLesson1Transition() {
 	welcome.destroy();
 	
 	TVFromCenterToCorner();
+	playRandomVideo();
 	
 	game.time.events.add(500, createEvent, this);
 }
@@ -252,6 +255,14 @@ function loadVideo(vidNumber) {
 	console.log(vidNumber);
 }
 
+function handlePointerDown(pointer) {
+	for (area in clickableAreas) {
+		if (area.contains(pointer.x, pointer.y)) {
+			dummy();
+		}
+	}
+}
+
 function playVideo() {
 	video.play();
 }
@@ -297,7 +308,7 @@ function destroyPlayWindow() {
 function createEvent() {
 	switch (structure[eventID].category) {
 		case "lesson":
-			createLesson();
+			createQuizz();
 			break;
 		case "quizz":
 			console.log('quizz');
@@ -316,12 +327,20 @@ function createLesson() {
 	destroyTempGraphics();
 
 	play_window = game.add.image(20, 0, 'play_window');
+	
 	pageID = structure[eventID].id;
 	
 	//typewriteText();
 	writeText();
+}
+
+function createQuizz() {
+	destroyTempGraphics();
 	
-	playRandomVideo();
+	play_window = game.add.image(20, 0, 'play_window');
+	
+	writeQuizzQuestion();
+	writeQuizzAnswers();
 }
 
 function createLessonImage() {
@@ -352,6 +371,34 @@ function clearText() {
 		textHolder[i].destroy();
 	}
 	textHolderLineID = 0;
+}
+
+function writeQuizzQuestion() {
+	lineID = 0;
+	textHolderLineID = 0;
+	while (lineID < quizz[pageID].question.content.length) {
+		textHolder[textHolderLineID] = game.add.text(quizz[pageID].question.x, quizz[pageID].question.y+lineID*LINE_HEIGHT, quizz[pageID].question.content[lineID], { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
+		lineID++;
+		textHolderLineID++;
+	}
+}
+
+function writeQuizzAnswers() {
+	for (a in quizz[pageID].choices) {
+		textHolder[textHolderLineID] = game.add.text(500+(a%3)*400+(a>2)*200, 400+(a>2)*LINE_HEIGHT*2, quizz[pageID].choices[a], { font: DRAGGABLE_TEXT_FONT, fill: DRAGGABLE_TEXT_FILL, align: "center" });
+		lineID++;
+		textHolderLineID++;
+		createClickableArea(500, 400, 200, 50);
+	}
+}
+
+function createClickableArea(x, y, w, h) {
+	var clickableArea = new Phaser.Rectangle(x, y, w, h);
+	clickableAreas.push(clickableArea);
+}
+
+function dummy() {
+	console.log("dummy");
 }
 
 function writeText() {
