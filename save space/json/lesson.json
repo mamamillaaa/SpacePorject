@@ -52,12 +52,10 @@
 		{
 			"x": 380,
 			"y": 180,
-			"content": ["Le vide qui entoure la Terre est peuplé",
-						"d’un grand nombre d’objets qui, du fait",
-						"de leur vitesse très importante,",
-						"représentent un risque non négligeable",
-						"pour les missions spatiales."],
-			"picture": "lesson11",
+			"content": ["Depuis les débuts de la conquête spatiale",
+						"l'activité humaine a entraîné la production dans l'Espace",
+						"d'un très grand nombre d'objets de toutes tailles."],
+			"picture": "lesson21",
 			"picture_x": 400,
 			"picture_y": 450
 		},
@@ -65,12 +63,137 @@
 		{
 			"x": 920,
 			"y": 540,
-			"content": ["Ces objets représentent également",
-						"un risque sur Terre, en cas",
-						"de retombée de morceaux au sol."],
+			"content": ["En effet, en plus des très nombreux satellites,",
+						"divers objets ont été mis sur orbite.",
+						"étages supérieurs de lanceurs, moteurs d’appoint..."],
+			"picture": null,
+			"picture_x": null,
+			"picture_y": null
+		}
+	],
+
+	[
+		{
+			"x": 380,
+			"y": 180,
+			"content": ["Une fois leur vie achevée, ces objets restent sur orbite",
+						"si jamais ils se percutent, ils génèrent de nombreux fragments",
+						"qui créent ensuite un réel risques pour les autres objets"],
+			"picture": "lesson22",
+			"picture_x": 680,
+			"picture_y": 375
+		},
+		
+		{
+			"x": 380,
+			"y": 680,
+			"content": ["",
+						""],
+			"picture": null,
+			"picture_x": null,
+			"picture_y": null
+		}
+	],
+
+	[
+		{
+			"x": 380,
+			"y": 180,
+			"content": ["En orbite, la vitesse de ces objets peut atteindre 28000 km/h.",
+						"les dégats provoqués par une de ces particules",
+						"peuvent être considérables: actuellement aucun blindage n'y résiste,",
+						"et le scaphandre d'un spationaute est bien plus fragile!"],
+			"picture": "lesson31",
+			"picture_x": 400,
+			"picture_y": 450
+		},
+		
+		{
+			"x": 920,
+			"y": 540,
+			"content": ["Au sol, les risques existent aussi, même si une partie des satellites",
+						"se désintègrent en traversant l'atmosphère.",
+						"Mais certains matériaux comme le titane resistent très bien à ces conditions"
+						"et les parties qui en sont constituées peuvent atteindre le sol."],
+			"picture": "lesson32",
+			"picture_x": null,
+			"picture_y": null
+		}
+	],
+
+	[
+		{
+			"x": 380,
+			"y": 180,
+			"content": ["On peut séparer les solutions en trois parties.",
+						"La prévention, la protection,",
+						"et la résolution du problème.",
+						"Au niveau de la prévention, les principaux acteurs du domaine",
+						" ont commencé à prendre des mesures préventives pour réduire les débris."],
+			"picture": "lesson41",
+			"picture_x": 400,
+			"picture_y": 450
+		},
+		
+		{
+			"x": 920,
+			"y": 540,
+			"content": ["Cela consiste, par exemple, a mettre sur une orbite cimetière ",
+						"les satellites en fin de vie.",
+						"Un organisme, issu de la collaboration entre les différents pays",
+						"décris les mesures à appliquer. Il s'agit de l'IDAC."],
+			"picture": null,
+			"picture_x": null,
+			"picture_y": null
+		}
+	],
+
+	[
+		{
+			"x": 380,
+			"y": 180,
+			"content": ["Niveau protection, les satellites sont équipés de blindages.",
+						"et la conception des satellites est fait de telle sorte ",
+						"à proteger les équipements fragiles",
+						" en les plaçant vers l'intérieur du satellite"],
+			"picture": "lesson42",
+			"picture_x": 400,
+			"picture_y": 450
+		},
+		
+		{
+			"x": 920,
+			"y": 540,
+			"content": ["",""],
+			"picture": null,
+			"picture_x": null,
+			"picture_y": null
+		}
+	],
+
+	[
+		{
+			"x": 380,
+			"y": 180,
+			"content": ["Niveau résolution du problème",
+						"de nombreux projets sont à l'études,",
+						"avec par exemple un filet pour capturer les débris",
+						"et les envoyer ensuite dans l'atmosphère!",
+						"On imagine aussi des boules d'aérogel pour absorber les impacts..."],
+			"picture": "lesson41",
+			"picture_x": 400,
+			"picture_y": 450
+		},
+		
+		{
+			"x": 920,
+			"y": 540,
+			"content": ["",""],
 			"picture": null,
 			"picture_x": null,
 			"picture_y": null
 		}
 	]
+
+
 ]
