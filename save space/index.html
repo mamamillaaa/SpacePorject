@@ -117,9 +117,9 @@ function create() {
 	game.scale.pageAlignVertically = true;
 	game.scale.setShowAll();
 	game.scale.refresh();
-	
+
 	game.input.onDown.add(handlePointerDown);
-	
+
 	//createPlayScene();
 	structure = game.cache.getJSON('gameStructure');
 	quizz = game.cache.getJSON('quizz');
@@ -251,7 +251,7 @@ function intro2ToLesson1Transition() {
 
 	TVFromCenterToCorner();
 	playRandomVideo();
-	
+
 	game.time.events.add(500, createEvent, this);
 }
 
@@ -375,7 +375,7 @@ function createLesson() {
 	destroyTempGraphics();
 
 	play_window = game.add.image(20, 0, 'play_window');
-	
+
 	pageID = structure[eventID].id;
 
 	//typewriteText();
@@ -384,9 +384,11 @@ function createLesson() {
 
 function createQuizz() {
 	destroyTempGraphics();
-	
+
 	play_window = game.add.image(20, 0, 'play_window');
 	
+	pageID = structure[eventID].id;
+
 	writeQuizzQuestion();
 	writeQuizzAnswers();
 }
@@ -405,6 +407,7 @@ function destroyLessonImage() {
 function next() {
 	destroyArrows();
 	eventID = structure[eventID].next;
+	console.log(structure[eventID].next);
 	createEvent();
 }
 
@@ -453,6 +456,7 @@ function dummy() {
 function checkAnswer(playerChoice) {
 	if (quizz[pageID].answer == playerChoice) {
 		console.log("bjbj");
+		next();
 	}
 	else {
 		console.log("nope");
