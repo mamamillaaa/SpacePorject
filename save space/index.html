@@ -54,6 +54,8 @@ var lineID = 0;
 
 var buildings = [];
 
+var fusee;
+
  VIDEO_LENGTH = [4200, 4200, 8200, 11200, 6200, 14200, 8200];
 
 
@@ -86,6 +88,8 @@ function preload() {
 	game.load.image('building7','assets/image/buildings/batiment7.png');
 	game.load.image('building8','assets/image/buildings/batiment8.png');
 	game.load.image('building9','assets/image/buildings/batiment9.png');
+
+	game.load.spritesheet('fusee','assets/image/buildings/fusee.png',300,300,3);
 
 	//game.load.image('validationButton', 'validation_button.png');
 
@@ -182,13 +186,33 @@ function createIntro1() {
 	game.time.events.add(4200, intro2ToLesson1Transition, this);
 }
 
+function fuseeMove(){
+    tween = game.add.tween(fusee);
+    tween.to({ x: [game.world.centerX-100], y: [game.world.centerY] }, 2000, Phaser.Easing.Circular.None, true);
+		tween.onComplete.add(fuseeStop,this);
+    tween.start();
+}
+
+function fuseeStop(){
+	fuse.stop();
+	fusee.frame = 0;
+}
+
 function build(){
   buildingsJson = game.cache.getJSON('buildingsJson');
 	for (var i=0; i <= 8; i++){
-    buildings[i] = game.add.sprite((buildingsJson.Buildings[i].Building.x)*1.92+200, ((buildingsJson.Buildings[i].Building.y)*1.35)+550, "building"+(i+1));
-		buildings[i].anchor.setTo(0.5,1);
-		buildings[i].angle = buildingsJson.Buildings[i].Building.angle;
+		if (buildingsJson.Buildings[i].Building.showable == true){
+			buildings[i] = game.add.sprite((buildingsJson.Buildings[i].Building.x)*1.92+200, ((buildingsJson.Buildings[i].Building.y)*1.35)+550, "building"+(i+1));
+			buildings[i].anchor.setTo(0.5,1);
+			buildings[i].angle = buildingsJson.Buildings[i].Building.angle;
+		}
   }
+	if (typeof(fusee) == "undefined"){
+		fusee = game.add.sprite( 700, 0, "fusee");
+		fuse = fusee.animations.add('fuse',[1,2]);
+		fuse.play(10, true);
+		fuseeMove();
+	}
 }
 
 function intro1ToIntro2Transition() {
